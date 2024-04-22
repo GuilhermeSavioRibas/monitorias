@@ -11,7 +11,7 @@
     </style>
 </head>
 <body>
-    <h1>Formulário de Monitoria</h1>
+    <h1>Registro de Monitorias</h1>
     <form id="formulario_monitoria" action="/registrar" method="post">
         <label for="nome_analista">Nome do Analista:</label><br>
         <input type="text" id="nome_analista" name="nome_analista" required {% if mensagem %}value="{{ request.form.nome_analista }}"{% endif %}><br>
@@ -19,8 +19,11 @@
         <label for="data">Data:</label><br>
         <input type="date" id="data" name="data" required {% if mensagem %}value="{{ request.form.data }}"{% endif %}><br>
         
-        <label for="id_atendimento">ID do Atendimento:</label><br>
+        <label for="id_atendimento">Call_ID / Interaction:</label><br>
         <input type="text" id="id_atendimento" name="id_atendimento" required {% if mensagem %}value="{{ request.form.id_atendimento }}"{% endif %}><br>
+
+        <label for="chamado">Numero do chamado:</label><br>
+        <input type="number" id="chamado" name="chamado" required {% if mensagem %}value="{{ request.form.chamado }}"{% endif %}><br>
         
         <label for="duracao">Duração (em minutos):</label><br>
         <input type="number" id="duracao" name="duracao" required {% if mensagem %}value="{{ request.form.duracao }}"{% endif %}><br>
@@ -28,13 +31,17 @@
         <label for="nome_cliente">Nome do Cliente:</label><br>
         <input type="text" id="nome_cliente" name="nome_cliente" required {% if mensagem %}value="{{ request.form.nome_cliente }}"{% endif %}><br>
         
-        <label for="categoria">Categoria:</label><br>
+        <label for="categoria">Tipo de atendimento:</label><br>
         <select id="categoria" name="categoria" required>
-            <option value="Suporte Técnico" {% if mensagem and request.form.categoria == 'Suporte Técnico' %}selected{% endif %}>Suporte Técnico</option>
-            <option value="Vendas" {% if mensagem and request.form.categoria == 'Vendas' %}selected{% endif %}>Vendas</option>
-            <option value="Atendimento ao Cliente" {% if mensagem and request.form.categoria == 'Atendimento ao Cliente' %}selected{% endif %}>Atendimento ao Cliente</option>
-        </select><br><br>
-        
+            <option value="Acessos" {% if mensagem and request.form.categoria == 'Acessos' %}selected{% endif %}>Acessos</option>
+            <option value="Hardware" {% if mensagem and request.form.categoria == 'Hardware' %}selected{% endif %}>Hardware</option>
+            <option value="Software" {% if mensagem and request.form.categoria == 'Software' %}selected{% endif %}>Software</option>
+            <option value="Consulta" {% if mensagem and request.form.categoria == 'Consulta' %}selected{% endif %}>Consulta</option>
+        </select><br>
+
+        <label for="nota">Nota:</label><br>
+        <input type="text" id="nota" name="nota" required {% if mensagem %}value="{{ request.form.nota }}"{% endif %}><br><br>
+
         <input type="submit" value="Salvar">
     </form>
 
