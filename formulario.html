@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Monitoria</title>
+    <style>
+        .mensagem_oculta {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Formulário de Monitoria</h1>
+    <form id="formulario_monitoria" action="/registrar" method="post">
+        <label for="nome_analista">Nome do Analista:</label><br>
+        <input type="text" id="nome_analista" name="nome_analista" required {% if mensagem %}value="{{ request.form.nome_analista }}"{% endif %}><br>
+        
+        <label for="data">Data:</label><br>
+        <input type="date" id="data" name="data" required {% if mensagem %}value="{{ request.form.data }}"{% endif %}><br>
+        
+        <label for="id_atendimento">ID do Atendimento:</label><br>
+        <input type="text" id="id_atendimento" name="id_atendimento" required {% if mensagem %}value="{{ request.form.id_atendimento }}"{% endif %}><br>
+        
+        <label for="duracao">Duração (em minutos):</label><br>
+        <input type="number" id="duracao" name="duracao" required {% if mensagem %}value="{{ request.form.duracao }}"{% endif %}><br>
+        
+        <label for="nome_cliente">Nome do Cliente:</label><br>
+        <input type="text" id="nome_cliente" name="nome_cliente" required {% if mensagem %}value="{{ request.form.nome_cliente }}"{% endif %}><br>
+        
+        <label for="categoria">Categoria:</label><br>
+        <select id="categoria" name="categoria" required>
+            <option value="Suporte Técnico" {% if mensagem and request.form.categoria == 'Suporte Técnico' %}selected{% endif %}>Suporte Técnico</option>
+            <option value="Vendas" {% if mensagem and request.form.categoria == 'Vendas' %}selected{% endif %}>Vendas</option>
+            <option value="Atendimento ao Cliente" {% if mensagem and request.form.categoria == 'Atendimento ao Cliente' %}selected{% endif %}>Atendimento ao Cliente</option>
+        </select><br><br>
+        
+        <input type="submit" value="Registrar">
+    </form>
+
+    <!-- Exibir mensagem de confirmação -->
+    <p id="mensagem_registro" class="{% if not mensagem %}mensagem_oculta{% endif %}">{{ mensagem }}</p>
+
+    <!-- Campo oculto para armazenar o estado da mensagem -->
+    <input type="hidden" id="mensagem_status" value="{{ 'visivel' if mensagem else 'invisivel' }}">
+
+    <!-- Botão para registrar nova monitoria e limpar o formulário -->
+    <button type="button" id="registrar_nova_monitoria">Registrar Nova Monitoria</button>
+
+    <script>
+        // Ação ao clicar no botão "Registrar Nova Monitoria"
+        document.getElementById('registrar_nova_monitoria').addEventListener('click', function() {
+            // Limpar os campos do formulário
+            document.getElementById("formulario_monitoria").reset();
+            // Ocultar a mensagem de confirmação
+            document.getElementById("mensagem_registro").classList.add('mensagem_oculta');
+            document.getElementById("mensagem_status").value = 'invisivel';
+            // Limpar os valores dos campos do formulário
+            document.getElementById("nome_analista").value = "";
+            document.getElementById("data").value = "";
+            document.getElementById("id_atendimento").value = "";
+            document.getElementById("duracao").value = "";
+            document.getElementById("nome_cliente").value = "";
+            document.getElementById("categoria").value = "";
+        });
+    </script>
+</body>
+</html>
