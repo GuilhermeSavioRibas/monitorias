@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulário de Monitoria</title>
+    <title>Registro de Monitoria</title>
     <style>
         .mensagem_oculta {
             display: none;
@@ -35,7 +35,7 @@
             <option value="Atendimento ao Cliente" {% if mensagem and request.form.categoria == 'Atendimento ao Cliente' %}selected{% endif %}>Atendimento ao Cliente</option>
         </select><br><br>
         
-        <input type="submit" value="Registrar">
+        <input type="submit" value="Salvar">
     </form>
 
     <!-- Exibir mensagem de confirmação -->
@@ -45,7 +45,7 @@
     <input type="hidden" id="mensagem_status" value="{{ 'visivel' if mensagem else 'invisivel' }}">
 
     <!-- Botão para registrar nova monitoria e limpar o formulário -->
-    <button type="button" id="registrar_nova_monitoria">Registrar Nova Monitoria</button>
+    <button type="button" id="registrar_nova_monitoria">Nova Monitoria</button>
 
     <script>
         // Ação ao clicar no botão "Registrar Nova Monitoria"
