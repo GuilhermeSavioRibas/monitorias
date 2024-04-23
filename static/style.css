@@ -46,6 +46,16 @@ select {
     box-sizing: border-box;
 }
 
+textarea {
+    width: calc(100% - 10px); /* Reduza a largura do textarea */
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+
 select {
     height: 40px;
 }

@@ -2,7 +2,6 @@ import pandas as pd
 from flask import Flask, render_template, request
 
 
-
 app = Flask(__name__, static_url_path='/static', static_folder='static')
 
 # Função para carregar os dados da planilha Excel
@@ -10,7 +9,7 @@ def carregar_dados():
     try:
         return pd.read_excel('monitorias.xlsx')
     except FileNotFoundError:
-        return pd.DataFrame(columns=['Nome_Analista', 'Projeto', 'Data', 'ID_Atendimento', 'Chamado', 'Duracao', 'Nome_Cliente', 'Categoria', 'Nota'])
+        return pd.DataFrame(columns=['Nome_Analista', 'Projeto', 'Data', 'ID_Atendimento', 'Chamado', 'Duracao', 'Nome_Cliente', 'Categoria', 'Nota', 'Observacao'])
 
 # Função para salvar os dados na planilha Excel
 def salvar_dados(dados):
@@ -35,12 +34,13 @@ def registrar_monitoria():
     nome_cliente = request.form['nome_cliente']
     categoria = request.form['categoria']
     nota = request.form['nota']
+    observacao = request.form['observacao']
 
     # Carregar dados existentes
     dados = carregar_dados()
 
     # Adicionar nova entrada aos dados
-    nova_linha = pd.DataFrame([[nome_analista, projeto, data, id_atendimento, chamado, duracao, nome_cliente, categoria, nota]], columns=dados.columns)
+    nova_linha = pd.DataFrame([[nome_analista, projeto, data, id_atendimento, chamado, duracao, nome_cliente, categoria, nota, observacao]], columns=dados.columns)
     dados = pd.concat([dados, nova_linha], ignore_index=True)
 
     # Salvar dados atualizados

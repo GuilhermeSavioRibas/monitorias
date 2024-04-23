@@ -10,8 +10,6 @@
 <body>
     <h2>Registro de Monitorias</h2>
 
-    
-
     <!-- Exibir mensagem de confirmação -->
     <p id="mensagem_registro" class="{% if not mensagem %}mensagem_oculta{% endif %}">{{ mensagem }}</p>
 
@@ -55,6 +53,10 @@
         <label for="nota">Nota:</label><br>
         <input type="text" id="nota" name="nota" required {% if mensagem %}value="{{ request.form.nota }}"{% endif %}><br><br>
 
+        <label for="observacao">Observação:</label><br>
+        <textarea id="observacao" name="observacao" required>{% if mensagem %}{{ request.form.observacao }}{% endif %}</textarea><br><br>
+
+
         <input type="submit" value="Salvar">
     </form>
 
@@ -76,6 +78,7 @@
             document.getElementById("chamado").value = "";
             document.getElementById("nota").value = "";
             document.getElementById("projeto").value = "";
+            document.getElementById("observacao").value = "";
         });
     </script>
 </body>
