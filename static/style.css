@@ -5,18 +5,26 @@ body {
     padding: 0;
 }
 
-h1 {
+h2 {
     text-align: center;
     color: #333;
 }
 
 form {
-    max-width: 600px;
+    max-width: 800px; /* Defina uma largura máxima maior para acomodar as duas colunas */
     margin: 0 auto;
     background: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex; /* Use flexbox para criar duas colunas */
+    flex-wrap: wrap; /* Permita que os elementos do formulário quebrem para a próxima linha */
+}
+
+/* Estilo para a primeira coluna */
+.form-col {
+    width: calc(50% - 10px); /* Defina a largura para ocupar metade do espaço disponível */
+    margin-right: 20px; /* Adicione margem à direita para separar as colunas */
 }
 
 label {
@@ -30,9 +38,9 @@ input[type="text"],
 input[type="number"],
 input[type="date"],
 select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
+    width: calc(100% - 10px); /* Reduza a largura dos campos de entrada */
+    padding: 8px;
+    margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
@@ -46,16 +54,13 @@ input[type="submit"],
 #registrar_nova_monitoria {
     background-color: #4CAF50;
     color: white;
-    padding: 14px 20px;
-    margin: 8px auto; /* Centralizar o botão horizontalmente */
+    padding: 12px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    width: 200px; /* Largura fixa para o botão */
+    width: 100%;
     font-size: 16px;
-    display: block; /* Torna o botão um elemento de bloco */
 }
-
 
 input[type="submit"]:hover,
 #registrar_nova_monitoria:hover {
