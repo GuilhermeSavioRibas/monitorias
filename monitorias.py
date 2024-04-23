@@ -1,6 +1,6 @@
-from flask import Flask, render_template, request
-from datetime import datetime
 import pandas as pd
+from flask import Flask, render_template, request, redirect, url_for
+from datetime import datetime
 
 app = Flask(__name__, static_url_path='/static', static_folder='static')
 
@@ -16,35 +16,41 @@ def salvar_dados(dados):
     dados.to_excel('monitorias.xlsx', index=False)
 
 # Rota para exibir o formulário de registro de monitoria e as monitorias registradas
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 def formulario_monitoria():
-    if request.method == 'POST':
-        nome_analista = request.form['nome_analista']
-        projeto = request.form['projeto']
-        data = request.form['data']
-        id_atendimento = request.form['id_atendimento']
-        chamado = request.form['chamado']
-        duracao = request.form['duracao']
-        nome_cliente = request.form['nome_cliente']
-        categoria = request.form['categoria']
-        nota = request.form['nota']
-        observacao = request.form['observacao']
+    # Carregar os dados das monitorias
+    monitorias = carregar_dados().to_dict('records')
+    return render_template('formulario.html', monitorias=monitorias, today=datetime.now().strftime('%Y-%m-%d'))
 
-        # Carregar dados existentes
-        dados = carregar_dados()
+# Rota para lidar com o envio do formulário
+@app.route('/registrar', methods=['POST'])
+def registrar_monitoria():
+    nome_analista = request.form['nome_analista']
+    projeto = request.form['projeto']
+    data = request.form['data']
+    id_atendimento = request.form['id_atendimento']
+    chamado = request.form['chamado']
+    duracao = request.form['duracao']
+    nome_cliente = request.form['nome_cliente']
+    categoria = request.form['categoria']
+    nota = request.form['nota']
+    observacao = request.form['observacao']
 
-        # Adicionar nova entrada aos dados
-        nova_linha = pd.DataFrame([[nome_analista, projeto, data, id_atendimento, chamado, duracao, nome_cliente, categoria, nota, observacao]], columns=dados.columns)
-        dados = pd.concat([dados, nova_linha], ignore_index=True)
+    # Carregar dados existentes
+    dados = carregar_dados()
 
-        # Salvar dados atualizados
-        salvar_dados(dados)
+    # Adicionar nova entrada aos dados
+    nova_linha = pd.DataFrame([[nome_analista, projeto, data, id_atendimento, chamado, duracao, nome_cliente, categoria, nota, observacao]], columns=dados.columns)
+    dados = pd.concat([dados, nova_linha], ignore_index=True)
 
-        return render_template('formulario.html', mensagem='Monitoria registrada com sucesso!')
-    else:
-        # Carregar os dados das monitorias
-        monitorias = carregar_dados().to_dict('records')
-        return render_template('formulario.html', monitorias=monitorias, today=datetime.now().strftime('%Y-%m-%d'))
+    # Salvar dados atualizados
+    salvar_dados(dados)
+
+    # Limpar campos do formulário
+    # request.form = {}
+
+    # Redirecionar de volta para a página principal
+    return redirect(url_for('formulario_monitoria', mensagem='Monitoria registrada com sucesso!'))
 
 if __name__ == '__main__':
     app.run(debug=True)
