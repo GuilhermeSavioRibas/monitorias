@@ -18,7 +18,7 @@
 
     <form id="formulario_monitoria" action="/registrar" method="post">
 
-        <!-- Botão para registrar nova monitoria e limpar o formulário -->
+        <!-- Botão para limpar o formulário -->
         <button type="button" id="registrar_nova_monitoria">Limpar formulário</button><br>
 
         <label for="data">Data:</label><br>
@@ -67,23 +67,21 @@
     </form>
 
     <script>
-        // Ação ao clicar no botão "Registrar Nova Monitoria"
+        // Ação ao clicar no botão "Limpar formulário"
         document.getElementById('registrar_nova_monitoria').addEventListener('click', function() {
-            // Limpar os campos do formulário
-            // document.getElementById("formulario_monitoria").reset();
-            // Ocultar a mensagem de confirmação
-            document.getElementById("mensagem_registro").classList.add('mensagem_oculta');
-            document.getElementById("mensagem_status").value = 'invisivel';
-            // Limpar os valores dos campos do formulário
-            document.getElementById("nome_analista").value = "";
-            document.getElementById("id_atendimento").value = "";
-            document.getElementById("duracao").value = "";
-            document.getElementById("nome_cliente").value = "";
-            document.getElementById("categoria").value = "";
-            document.getElementById("chamado").value = "";
-            document.getElementById("nota").value = "";
-            document.getElementById("projeto").value = "";
-            document.getElementById("observacao").value = "";
+        // Ocultar a mensagem de confirmação
+        document.getElementById("mensagem_registro").classList.add('mensagem_oculta');
+        document.getElementById("mensagem_status").value = 'invisivel';
+        // Limpar os valores dos campos do formulário
+        document.getElementById("projeto").value = "";
+        document.getElementById("nome_analista").value = "";
+        document.getElementById("id_atendimento").value = "";
+        document.getElementById("duracao").value = "";
+        document.getElementById("chamado").value = "";
+        document.getElementById("nome_cliente").value = "";
+        document.getElementById("categoria").value = "";
+        document.getElementById("nota").value = "";
+        document.getElementById("observacao").value = "";
         });
     </script>
 </body>
