@@ -25,19 +25,25 @@
         <input type="text" id="nome_analista" name="nome_analista" required {% if mensagem %}value="{{ request.form.nome_analista }}"{% endif %}><br>
 
         <label for="projeto">Projeto:</label><br>
-        <input type="text" id="projeto" name="projeto" required {% if mensagem %}value="{{ request.form.projeto }}"{% endif %}><br>
+        <select id="projeto" name="projeto" required>
+            <option value="" {% if not mensagem %}selected{% endif %}>Selecione o projeto</option>
+            <option value="Flowserve" {% if mensagem and request.form.projeto == "Flowserve" %}selected{% endif %}>Flowserve</option>
+            <option value="Cteep" {% if mensagem and request.form.projeto == "Cteep" %}selected{% endif %}>Cteep</option>
+            <option value="Henkel" {% if mensagem and request.form.projeto == "Henkel" %}selected{% endif %}>Henkel</option>
+            <option value="UUS" {% if mensagem and request.form.projeto == "UUS" %}selected{% endif %}>UUS</option>
+        </select><br>
         
         <label for="data">Data:</label><br>
-        <input type="date" id="data" name="data" required {% if mensagem %}value="{{ request.form.data }}"{% endif %}><br>
-        
+        <input type="date" id="data" name="data" required value="{{ today }}"><br>
+
         <label for="id_atendimento">Call_ID / Interaction:</label><br>
         <input type="text" id="id_atendimento" name="id_atendimento" required {% if mensagem %}value="{{ request.form.id_atendimento }}"{% endif %}><br>
+    
+        <label for="duracao">Duração (em minutos):</label><br>
+        <input type="number" id="duracao" name="duracao" required {% if mensagem %}value="{{ request.form.duracao }}"{% endif %}><br>
 
         <label for="chamado">Numero do chamado:</label><br>
         <input type="number" id="chamado" name="chamado" required {% if mensagem %}value="{{ request.form.chamado }}"{% endif %}><br>
-        
-        <label for="duracao">Duração (em minutos):</label><br>
-        <input type="number" id="duracao" name="duracao" required {% if mensagem %}value="{{ request.form.duracao }}"{% endif %}><br>
         
         <label for="nome_cliente">Nome do Cliente:</label><br>
         <input type="text" id="nome_cliente" name="nome_cliente" required {% if mensagem %}value="{{ request.form.nome_cliente }}"{% endif %}><br>
@@ -55,7 +61,6 @@
 
         <label for="observacao">Observação:</label><br>
         <textarea id="observacao" name="observacao" required>{% if mensagem %}{{ request.form.observacao }}{% endif %}</textarea><br><br>
-
 
         <input type="submit" value="Salvar">
     </form>
