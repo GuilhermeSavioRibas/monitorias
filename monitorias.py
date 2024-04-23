@@ -8,7 +8,7 @@ def carregar_dados():
     try:
         return pd.read_excel('monitorias.xlsx')
     except FileNotFoundError:
-        return pd.DataFrame(columns=['Nome_Analista', 'Data', 'ID_Atendimento', 'Chamado', 'Duracao', 'Nome_Cliente', 'Categoria', 'Nota'])
+        return pd.DataFrame(columns=['Nome_Analista', 'Projeto', 'Data', 'ID_Atendimento', 'Chamado', 'Duracao', 'Nome_Cliente', 'Categoria', 'Nota'])
 
 # Função para salvar os dados na planilha Excel
 def salvar_dados(dados):
@@ -25,6 +25,7 @@ def formulario_monitoria():
 @app.route('/registrar', methods=['POST'])
 def registrar_monitoria():
     nome_analista = request.form['nome_analista']
+    projeto = request.form['projeto']
     data = request.form['data']
     id_atendimento = request.form['id_atendimento']
     chamado = request.form['chamado']
@@ -37,7 +38,7 @@ def registrar_monitoria():
     dados = carregar_dados()
 
     # Adicionar nova entrada aos dados
-    nova_linha = pd.DataFrame([[nome_analista, data, id_atendimento, chamado, duracao, nome_cliente, categoria, nota]], columns=dados.columns)
+    nova_linha = pd.DataFrame([[nome_analista, projeto, data, id_atendimento, chamado, duracao, nome_cliente, categoria, nota]], columns=dados.columns)
     dados = pd.concat([dados, nova_linha], ignore_index=True)
 
     # Salvar dados atualizados
