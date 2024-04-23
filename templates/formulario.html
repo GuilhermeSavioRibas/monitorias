@@ -4,15 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Monitoria</title>
-    <style>
-        .mensagem_oculta {
-            display: none;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
 </head>
 <body>
     <h1>Registro de Monitorias</h1>
+
+    
+
+    <!-- Exibir mensagem de confirmação -->
+    <p id="mensagem_registro" class="{% if not mensagem %}mensagem_oculta{% endif %}">{{ mensagem }}</p>
+
+    <!-- Campo oculto para armazenar o estado da mensagem -->
+    <input type="hidden" id="mensagem_status" value="{{ 'visivel' if mensagem else 'invisivel' }}">
+
     <form id="formulario_monitoria" action="/registrar" method="post">
+
+        <!-- Botão para registrar nova monitoria e limpar o formulário -->
+        <button type="button" id="registrar_nova_monitoria">Nova Monitoria</button>
+
         <label for="nome_analista">Nome do Analista:</label><br>
         <input type="text" id="nome_analista" name="nome_analista" required {% if mensagem %}value="{{ request.form.nome_analista }}"{% endif %}><br>
 
@@ -48,14 +58,9 @@
         <input type="submit" value="Salvar">
     </form>
 
-    <!-- Exibir mensagem de confirmação -->
-    <p id="mensagem_registro" class="{% if not mensagem %}mensagem_oculta{% endif %}">{{ mensagem }}</p>
 
-    <!-- Campo oculto para armazenar o estado da mensagem -->
-    <input type="hidden" id="mensagem_status" value="{{ 'visivel' if mensagem else 'invisivel' }}">
 
-    <!-- Botão para registrar nova monitoria e limpar o formulário -->
-    <button type="button" id="registrar_nova_monitoria">Nova Monitoria</button>
+   
 
     <script>
         // Ação ao clicar no botão "Registrar Nova Monitoria"

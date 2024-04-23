@@ -1,0 +1,76 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+select {
+    height: 40px;
+}
+
+input[type="submit"],
+#registrar_nova_monitoria {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px auto; /* Centralizar o botão horizontalmente */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 200px; /* Largura fixa para o botão */
+    font-size: 16px;
+    display: block; /* Torna o botão um elemento de bloco */
+}
+
+
+input[type="submit"]:hover,
+#registrar_nova_monitoria:hover {
+    background-color: #45a049;
+}
+
+#mensagem_registro {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #dff0d8;
+    border: 1px solid #d6e9c6;
+    color: #3c763d;
+    border-radius: 5px;
+}
+
+.mensagem_oculta {
+    display: none;
+}
