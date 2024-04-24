@@ -88,3 +88,37 @@ input[type="submit"]:hover,
 .mensagem_oculta {
     display: none;
 }
+
+#monitorias-table {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow-x: auto; /* Adicione rolagem horizontal caso a tabela seja muito larga */
+}
+
+#monitorias-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#monitorias-table th,
+#monitorias-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#monitorias-table th {
+    background-color: #f2f2f2;
+}
+
+#monitorias-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#monitorias-table tbody tr:hover {
+    background-color: #f2f2f2;
+}
+

@@ -99,16 +99,16 @@ $(document).ready(function() {
             table += '<tr><th>Data</th><th>Projeto</th><th>Nome do Analista</th><th>ID de Atendimento</th><th>Duração</th><th>Chamado</th><th>Nome do Cliente</th><th>Categoria</th><th>Nota</th><th>Observação</th></tr>';
             for (var i = 0; i < monitorias.length; i++) {
                 table += '<tr>';
-                table += '<td>' + monitorias[i].Data + '</td>';
-                table += '<td>' + monitorias[i].Projeto + '</td>';
-                table += '<td>' + monitorias[i].Nome_Analista + '</td>';
-                table += '<td>' + monitorias[i].ID_Atendimento + '</td>';
-                table += '<td>' + monitorias[i].Duracao + '</td>';
-                table += '<td>' + monitorias[i].Chamado + '</td>';
-                table += '<td>' + monitorias[i].Nome_Cliente + '</td>';
-                table += '<td>' + monitorias[i].Categoria + '</td>';
-                table += '<td>' + monitorias[i].Nota + '</td>';
-                table += '<td>' + monitorias[i].Observacao + '</td>';
+                table += '<td>' + monitorias[i].data + '</td>';
+                table += '<td>' + monitorias[i].projeto + '</td>';
+                table += '<td>' + monitorias[i].nome_analista + '</td>';
+                table += '<td>' + monitorias[i].id_atendimento + '</td>';
+                table += '<td>' + monitorias[i].duracao + '</td>';
+                table += '<td>' + monitorias[i].chamado + '</td>';
+                table += '<td>' + monitorias[i].nome_cliente + '</td>';
+                table += '<td>' + monitorias[i].categoria + '</td>';
+                table += '<td>' + monitorias[i].nota + '</td>';
+                table += '<td>' + monitorias[i].observacao + '</td>';
                 table += '</tr>';
             }
             table += '</table>';
