@@ -84,5 +84,41 @@
         document.getElementById("observacao").value = "";
         });
     </script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    $.ajax({
+        url: '/monitorias_json',
+        type: 'GET',
+        success: function(data) {
+            var monitorias = JSON.parse(data);
+            // Exibir os dados das monitorias na página
+            // Por exemplo, você pode usar jQuery para percorrer os dados e adicioná-los a uma tabela HTML
+            var table = '<table>';
+            table += '<tr><th>Data</th><th>Projeto</th><th>Nome do Analista</th><th>ID de Atendimento</th><th>Duração</th><th>Chamado</th><th>Nome do Cliente</th><th>Categoria</th><th>Nota</th><th>Observação</th></tr>';
+            for (var i = 0; i < monitorias.length; i++) {
+                table += '<tr>';
+                table += '<td>' + monitorias[i].Data + '</td>';
+                table += '<td>' + monitorias[i].Projeto + '</td>';
+                table += '<td>' + monitorias[i].Nome_Analista + '</td>';
+                table += '<td>' + monitorias[i].ID_Atendimento + '</td>';
+                table += '<td>' + monitorias[i].Duracao + '</td>';
+                table += '<td>' + monitorias[i].Chamado + '</td>';
+                table += '<td>' + monitorias[i].Nome_Cliente + '</td>';
+                table += '<td>' + monitorias[i].Categoria + '</td>';
+                table += '<td>' + monitorias[i].Nota + '</td>';
+                table += '<td>' + monitorias[i].Observacao + '</td>';
+                table += '</tr>';
+            }
+            table += '</table>';
+            $('#monitorias-table').html(table);
+        }
+    });
+});
+</script>
+
+<div id="monitorias-table"></div>
+
 </body>
 </html>

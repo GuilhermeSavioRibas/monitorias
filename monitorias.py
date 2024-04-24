@@ -1,4 +1,5 @@
 import pandas as pd
+import json
 from flask import Flask, render_template, request, redirect, url_for
 from datetime import datetime
 
@@ -21,6 +22,12 @@ def formulario_monitoria():
     # Carregar os dados das monitorias
     monitorias = carregar_dados().to_dict('records')
     return render_template('formulario.html', monitorias=monitorias, today=datetime.now().strftime('%Y-%m-%d'))
+
+@app.route('/monitorias_json')
+def monitorias_json():
+    # Carregar os dados das monitorias
+    monitorias = carregar_dados().to_dict('records')
+    return json.dumps(monitorias)
 
 # Rota para lidar com o envio do formulário
 @app.route('/registrar', methods=['POST'])
