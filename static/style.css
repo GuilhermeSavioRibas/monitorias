@@ -5,6 +5,11 @@ body {
     padding: 0;
 }
 
+h1 {
+    text-align: center;
+    color: #333;
+}
+
 h2 {
     text-align: center;
     color: #333;
@@ -19,6 +24,7 @@ form {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex; /* Use flexbox para criar duas colunas */
     flex-wrap: wrap; /* Permita que os elementos do formulário quebrem para a próxima linha */
+    margin-bottom: 5px;
 }
 
 /* Estilo para a primeira coluna */
@@ -63,11 +69,13 @@ input[type="submit"],
 #registrar_nova_monitoria {
     background-color: #4CAF50;
     color: white;
+    margin-top: 5px;
+    margin-left: 5px;
     padding: 12px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    width: 100%;
+    width: 48.5%;
     font-size: 16px;
 }
 
@@ -90,12 +98,14 @@ input[type="submit"]:hover,
 }
 
 #monitorias-table {
-    margin-top: 20px;
+    max-width: 800px; /* Defina uma largura máxima maior para acomodar as duas colunas */
+    margin: 0 auto;
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     overflow-x: auto; /* Adicione rolagem horizontal caso a tabela seja muito larga */
+    margin-bottom: 20px;
 }
 
 #monitorias-table table {
