@@ -2,7 +2,7 @@
 
 Este é um projeto de um sistema de controle de monitorias desenvolvido para registrar as monitorias realizadas em ligações/chamados de atendimentos dos funcionários de um service desk. O sistema foi construído utilizando Python (Flask) para o backend e HTML, CSS e JavaScript para o frontend.
 
-## Funcionalidades Principais
+## Principais Funcionalidades 
 
 - **Registro de Monitorias:** Os funcionários podem registrar as monitorias realizadas durante as chamadas/atendimentos. (em construção) 
 - **Avaliação de Desempenho:** O sistema permite avaliar o desempenho dos funcionários durante as monitorias. (em construção)
