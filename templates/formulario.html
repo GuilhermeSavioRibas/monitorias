@@ -96,7 +96,6 @@ $(document).ready(function() {
         success: function(data) {
             var monitorias = JSON.parse(data);
             // Exibir os dados das monitorias na página
-            // Por exemplo, você pode usar jQuery para percorrer os dados e adicioná-los a uma tabela HTML
             var table = '<table>';
             table += '<h2>Tabela de monitorias</h2><tr><th>Data</th><th>Projeto</th><th>Nome do Analista</th><th>ID de Atendimento</th><th>Duração</th><th>Chamado</th><th>Nome do Cliente</th><th>Categoria</th><th>Nota</th><th>Observação</th></tr>';
             for (var i = 0; i < monitorias.length; i++) {
