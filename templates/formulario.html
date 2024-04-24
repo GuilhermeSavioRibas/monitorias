@@ -5,121 +5,133 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Monitoria</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
 </head>
 <body>
     <h1>Controle de Monitorias</h1>
+    <div class="container">
+        <div class="content">
+            
 
-    <!-- Exibir mensagem de confirmação -->
-    <p id="mensagem_registro" class="{% if not mensagem %}mensagem_oculta{% endif %}">{{ mensagem }}</p>
+            <!-- Exibir mensagem de confirmação -->
+            <p id="mensagem_registro" class="{% if not mensagem %}mensagem_oculta{% endif %}">{{ mensagem }}</p>
 
-    <!-- Campo oculto para armazenar o estado da mensagem -->
-    <input type="hidden" id="mensagem_status" value="{{ 'visivel' if mensagem else 'invisivel' }}">
-
-    <form id="formulario_monitoria" action="/registrar" method="post">
-        
-        <label for="data">Data:</label><br>
-        <input type="date" id="data" name="data" required value="{{ today }}" {% if mensagem %}value="{{ request.form.data }}"{% endif %}><br>
-
-        <label for="projeto">Projeto:</label><br>
-        <select id="projeto" name="projeto" required>
-            <option value="" {% if not mensagem %}selected{% endif %}>Selecione o projeto</option>
-            <option value="Flowserve" {% if mensagem and request.form.projeto == "Flowserve" %}selected{% endif %}>Flowserve</option>
-            <option value="Cteep" {% if mensagem and request.form.projeto == "Cteep" %}selected{% endif %}>Cteep</option>
-            <option value="Henkel" {% if mensagem and request.form.projeto == "Henkel" %}selected{% endif %}>Henkel</option>
-            <option value="UUS" {% if mensagem and request.form.projeto == "UUS" %}selected{% endif %}>UUS</option>
-        </select><br>
-
-        <label for="nome_analista">Nome do Analista:</label><br>
-        <input type="text" id="nome_analista" name="nome_analista" required {% if mensagem %}value="{{ request.form.nome_analista }}"{% endif %}><br>
-        
-        <label for="id_atendimento">Call_ID / Interaction:</label><br>
-        <input type="text" id="id_atendimento" name="id_atendimento" required {% if mensagem %}value="{{ request.form.id_atendimento }}"{% endif %}><br>
+            <!-- Campo oculto para armazenar o estado da mensagem -->
+            <input type="hidden" id="mensagem_status" value="{{ 'visivel' if mensagem else 'invisivel' }}">
     
-        <label for="duracao">Duração (em minutos):</label><br>
-        <input type="number" id="duracao" name="duracao" required {% if mensagem %}value="{{ request.form.duracao }}"{% endif %}><br>
-
-        <label for="chamado">Numero do chamado:</label><br>
-        <input type="text" id="chamado" name="chamado" required {% if mensagem %}value="{{ request.form.chamado }}"{% endif %}><br>
+        <div class="form-container">
+            <h2>Registrar monitoria</h2>
+            <form id="formulario_monitoria" action="/registrar" method="post">
         
-        <label for="nome_cliente">Nome do Cliente:</label><br>
-        <input type="text" id="nome_cliente" name="nome_cliente" required {% if mensagem %}value="{{ request.form.nome_cliente }}"{% endif %}><br>
-        
-        <label for="categoria">Categoria do atendimento:</label><br>
-        <select id="categoria" name="categoria" required>
-            <option value="Acessos" {% if mensagem and request.form.categoria == 'Acessos' %}selected{% endif %}>Acessos</option>
-            <option value="Hardware" {% if mensagem and request.form.categoria == 'Hardware' %}selected{% endif %}>Hardware</option>
-            <option value="Software" {% if mensagem and request.form.categoria == 'Software' %}selected{% endif %}>Software</option>
-            <option value="Consulta" {% if mensagem and request.form.categoria == 'Consulta' %}selected{% endif %}>Consulta</option>
-            <option value="Outros" {% if mensagem and request.form.categoria == 'Outros' %}selected{% endif %}>Outros</option>
-        </select><br>
+                <label for="data">Data:</label><br>
+                <input type="date" id="data" name="data" required value="{{ today }}" {% if mensagem %}value="{{ request.form.data }}"{% endif %}><br>
 
-        <label for="nota">Nota:</label><br>
-        <input type="text" id="nota" name="nota" required {% if mensagem %}value="{{ request.form.nota }}"{% endif %}><br><br>
+                <label for="projeto">Projeto:</label><br>
+                <select id="projeto" name="projeto" required>
+                    <option value="" {% if not mensagem %}selected{% endif %}>Selecione o projeto</option>
+                    <option value="Flowserve" {% if mensagem and request.form.projeto == "Flowserve" %}selected{% endif %}>Flowserve</option>
+                    <option value="Cteep" {% if mensagem and request.form.projeto == "Cteep" %}selected{% endif %}>Cteep</option>
+                    <option value="Henkel" {% if mensagem and request.form.projeto == "Henkel" %}selected{% endif %}>Henkel</option>
+                    <option value="UUS" {% if mensagem and request.form.projeto == "UUS" %}selected{% endif %}>UUS</option>
+                </select><br>
 
-        <label for="observacao">Observação:</label><br>
-        <textarea id="observacao" name="observacao" required>{% if mensagem %}{{ request.form.observacao }}{% endif %}</textarea><br><br>
+                <label for="nome_analista">Nome do Analista:</label><br>
+                <input type="text" id="nome_analista" name="nome_analista" required {% if mensagem %}value="{{ request.form.nome_analista }}"{% endif %}><br>
+                
+                <label for="id_atendimento">Call_ID / Interaction:</label><br>
+                <input type="text" id="id_atendimento" name="id_atendimento" required {% if mensagem %}value="{{ request.form.id_atendimento }}"{% endif %}><br>
+            
+                <label for="duracao">Duração (em minutos):</label><br>
+                <input type="number" id="duracao" name="duracao" required {% if mensagem %}value="{{ request.form.duracao }}"{% endif %}><br>
 
-        <!-- Botão para salvar a monitoria -->
-        <input type="submit" value="Salvar">
-        
-        <!-- Botão para limpar o formulário -->
-        <button type="button" id="registrar_nova_monitoria">Limpar formulário</button><br>
+                <label for="chamado">Numero do chamado:</label><br>
+                <input type="text" id="chamado" name="chamado" required {% if mensagem %}value="{{ request.form.chamado }}"{% endif %}><br>
+                
+                <label for="nome_cliente">Nome do Cliente:</label><br>
+                <input type="text" id="nome_cliente" name="nome_cliente" required {% if mensagem %}value="{{ request.form.nome_cliente }}"{% endif %}><br>
+                
+                <label for="categoria">Categoria do atendimento:</label><br>
+                <select id="categoria" name="categoria" required>
+                    <option value="Acessos" {% if mensagem and request.form.categoria == 'Acessos' %}selected{% endif %}>Acessos</option>
+                    <option value="Hardware" {% if mensagem and request.form.categoria == 'Hardware' %}selected{% endif %}>Hardware</option>
+                    <option value="Software" {% if mensagem and request.form.categoria == 'Software' %}selected{% endif %}>Software</option>
+                    <option value="Consulta" {% if mensagem and request.form.categoria == 'Consulta' %}selected{% endif %}>Consulta</option>
+                    <option value="Outros" {% if mensagem and request.form.categoria == 'Outros' %}selected{% endif %}>Outros</option>
+                </select><br>
+
+                <label for="nota">Nota:</label><br>
+                <input type="number" id="nota" name="nota" required {% if mensagem %}value="{{ request.form.nota }}"{% endif %}><br>
+
+                <label for="observacao">Observação:</label><br>
+                <textarea id="observacao" name="observacao">{% if mensagem %}{{ request.form.observacao }}{% endif %}</textarea><br><br>
+
+                <!-- Botão para salvar a monitoria -->
+                <input type="submit" value="Salvar">
+                
+                <!-- Botão para limpar o formulário -->
+                <button type="button" id="registrar_nova_monitoria">Limpar</button><br>
     
-    </form>
+            </form>
+        </div>
+    </div>
+    <div class="content">
+    <div class="table-container" id="monitorias-table"></div>
+    </div>
+</div>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        // Ação ao clicar no botão "Limpar formulário"
-        document.getElementById('registrar_nova_monitoria').addEventListener('click', function() {
-        // Ocultar a mensagem de confirmação
-        document.getElementById("mensagem_registro").classList.add('mensagem_oculta');
-        document.getElementById("mensagem_status").value = 'invisivel';
-        // Limpar os valores dos campos do formulário
-        document.getElementById("projeto").value = "";
-        document.getElementById("nome_analista").value = "";
-        document.getElementById("id_atendimento").value = "";
-        document.getElementById("duracao").value = "";
-        document.getElementById("chamado").value = "";
-        document.getElementById("nome_cliente").value = "";
-        document.getElementById("categoria").value = "";
-        document.getElementById("nota").value = "";
-        document.getElementById("observacao").value = "";
+        $(document).ready(function() {
+            $.ajax({
+                url: '/monitorias_json',
+                type: 'GET',
+                success: function(data) {
+                    var monitorias = JSON.parse(data);
+                    // Exibir os dados das monitorias na página
+                    var table = '<table>';
+                    table += '<h2>Tabela de monitorias</h2><tr><th>Data</th><th>Projeto</th><th>Nome do Analista</th><th>ID de Atendimento</th><th>Duração</th><th>Chamado</th><th>Nome do Cliente</th><th>Categoria</th><th>Nota</th><th>Observação</th></tr>';
+                    for (var i = 0; i < monitorias.length; i++) {
+                        table += '<tr>';
+                        table += '<td>' + monitorias[i].data + '</td>';
+                        table += '<td>' + monitorias[i].projeto + '</td>';
+                        table += '<td>' + monitorias[i].nome_analista + '</td>';
+                        table += '<td>' + monitorias[i].id_atendimento + '</td>';
+                        table += '<td>' + monitorias[i].duracao + '</td>';
+                        table += '<td>' + monitorias[i].chamado + '</td>';
+                        table += '<td>' + monitorias[i].nome_cliente + '</td>';
+                        table += '<td>' + monitorias[i].categoria + '</td>';
+                        table += '<td>' + monitorias[i].nota + '</td>';
+                        // Verifica se a observação está definida e não é nula
+                        if (monitorias[i].observacao !== null && monitorias[i].observacao !== undefined) {
+                            table += '<td>' + monitorias[i].observacao + '</td>';
+                        } else {
+                            table += '<td></td>'; // Se não estiver definida, exibe uma célula vazia
+                        }
+                        table += '</tr>';
+                    }
+                    table += '</table>';
+                    $('#monitorias-table').html(table);
+                }
+            });
         });
     </script>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-$(document).ready(function() {
-    $.ajax({
-        url: '/monitorias_json',
-        type: 'GET',
-        success: function(data) {
-            var monitorias = JSON.parse(data);
-            // Exibir os dados das monitorias na página
-            var table = '<table>';
-            table += '<h2>Tabela de monitorias</h2><tr><th>Data</th><th>Projeto</th><th>Nome do Analista</th><th>ID de Atendimento</th><th>Duração</th><th>Chamado</th><th>Nome do Cliente</th><th>Categoria</th><th>Nota</th><th>Observação</th></tr>';
-            for (var i = 0; i < monitorias.length; i++) {
-                table += '<tr>';
-                table += '<td>' + monitorias[i].data + '</td>';
-                table += '<td>' + monitorias[i].projeto + '</td>';
-                table += '<td>' + monitorias[i].nome_analista + '</td>';
-                table += '<td>' + monitorias[i].id_atendimento + '</td>';
-                table += '<td>' + monitorias[i].duracao + '</td>';
-                table += '<td>' + monitorias[i].chamado + '</td>';
-                table += '<td>' + monitorias[i].nome_cliente + '</td>';
-                table += '<td>' + monitorias[i].categoria + '</td>';
-                table += '<td>' + monitorias[i].nota + '</td>';
-                table += '<td>' + monitorias[i].observacao + '</td>';
-                table += '</tr>';
-            }
-            table += '</table>';
-            $('#monitorias-table').html(table);
-        }
+    <script>
+    // Ação ao clicar no botão "Limpar formulário"
+    document.getElementById('registrar_nova_monitoria').addEventListener('click', function() {
+    // Ocultar a mensagem de confirmação
+    document.getElementById("mensagem_registro").classList.add('mensagem_oculta');
+    document.getElementById("mensagem_status").value = 'invisivel';
+    // Limpar os valores dos campos do formulário
+    document.getElementById("projeto").value = "";
+    document.getElementById("nome_analista").value = "";
+    document.getElementById("id_atendimento").value = "";
+    document.getElementById("duracao").value = "";
+    document.getElementById("chamado").value = "";
+    document.getElementById("nome_cliente").value = "";
+    document.getElementById("categoria").value = "";
+    document.getElementById("nota").value = "";
+    document.getElementById("observacao").value = "";
     });
-});
-</script>
-
-<div id="monitorias-table"></div>
-
+    </script>
+    
 </body>
 </html>

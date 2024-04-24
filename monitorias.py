@@ -23,15 +23,21 @@ def formulario_monitoria():
     monitorias = carregar_dados().to_dict('records')
     return render_template('formulario.html', monitorias=monitorias, today=datetime.now().strftime('%Y-%m-%d'))
 
+# Rota para fornecer dados das monitorias em formato JSON
 @app.route('/monitorias_json')
 def monitorias_json():
-    # Carregar os dados das monitorias
-    monitorias = carregar_dados().to_dict('records')
-    return json.dumps(monitorias)
+    # Carregar dados das monitorias
+    dados_monitorias = carregar_dados()  # Corrigido para chamar a função correta
+
+    # Converter dados para um formato JSON compatível
+    monitorias_json = dados_monitorias.to_json(orient='records')
+
+    return monitorias_json
 
 # Rota para lidar com o envio do formulário
 @app.route('/registrar', methods=['POST'])
 def registrar_monitoria():
+    # Extrair os dados do formulário
     data = request.form['data']
     projeto = request.form['projeto']
     nome_analista = request.form['nome_analista']
@@ -41,8 +47,10 @@ def registrar_monitoria():
     nome_cliente = request.form['nome_cliente']
     categoria = request.form['categoria']
     nota = request.form['nota']
-    observacao = request.form['observacao']
-
+    
+    # Verificar se o campo de observação está presente no formulário
+    observacao = request.form.get('observacao', '')  # Se não estiver presente, usa uma string vazia
+    
     # Carregar dados existentes
     dados = carregar_dados()
 
@@ -53,10 +61,7 @@ def registrar_monitoria():
     # Salvar dados atualizados
     salvar_dados(dados)
 
-    # Limpar campos do formulário
-    # request.form = {}
-
-    # Redirecionar de volta para a página principal
+    # Redirecionar para a página principal com mensagem de sucesso
     return redirect(url_for('formulario_monitoria', mensagem='Monitoria registrada com sucesso!'))
 
 if __name__ == '__main__':

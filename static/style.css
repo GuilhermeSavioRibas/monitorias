@@ -8,52 +8,72 @@ body {
 h1 {
     text-align: center;
     color: #333;
+    margin-top: 20px;
 }
 
 h2 {
     text-align: center;
     color: #333;
+    margin-top: 20px;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    max-width: 1200px; /* Limita a largura total da página */
+    margin: 5px auto; /* Centraliza a div .content */
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.form-container {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Define a largura do formulário */
+    margin-left: 10%;
+}
+
+.table-container {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 50%; /* Define a largura da tabela */
 }
 
 form {
-    max-width: 800px; /* Defina uma largura máxima maior para acomodar as duas colunas */
-    margin: 0 auto;
     background: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    display: flex; /* Use flexbox para criar duas colunas */
-    flex-wrap: wrap; /* Permita que os elementos do formulário quebrem para a próxima linha */
-    margin-bottom: 5px;
-}
-
-/* Estilo para a primeira coluna */
-.form-col {
-    width: calc(50% - 10px); /* Defina a largura para ocupar metade do espaço disponível */
-    margin-right: 20px; /* Adicione margem à direita para separar as colunas */
 }
 
 label {
     display: block;
-    margin-bottom: 5px;
     font-weight: bold;
     color: #555;
+    font-size: 12px;
 }
 
 input[type="text"],
 input[type="number"],
 input[type="date"],
 select {
-    width: calc(100% - 10px); /* Reduza a largura dos campos de entrada */
+    width: calc(100% - 10px);
     padding: 8px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
+    margin-top: -5px;
 }
 
 textarea {
-    width: calc(100% - 10px); /* Reduza a largura do textarea */
+    width: calc(100% - 10px);
     padding: 8px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
@@ -62,7 +82,7 @@ textarea {
 }
 
 select {
-    height: 40px;
+    height: 35px;
 }
 
 input[type="submit"],
@@ -71,12 +91,13 @@ input[type="submit"],
     color: white;
     margin-top: 5px;
     margin-left: 5px;
-    padding: 12px 20px;
+    padding: 12px 2px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    width: 48.5%;
+    width: calc(50% - 10px); /* Ajusta a largura dos botões */
     font-size: 16px;
+    text-align: center;
 }
 
 input[type="submit"]:hover,
@@ -98,14 +119,11 @@ input[type="submit"]:hover,
 }
 
 #monitorias-table {
-    max-width: 800px; /* Defina uma largura máxima maior para acomodar as duas colunas */
-    margin: 0 auto;
-    padding: 20px;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    overflow-x: auto; /* Adicione rolagem horizontal caso a tabela seja muito larga */
-    margin-bottom: 20px;
+    padding: 20px;
+    width: 80%; /* Define a largura da tabela */
 }
 
 #monitorias-table table {
@@ -131,4 +149,3 @@ input[type="submit"]:hover,
 #monitorias-table tbody tr:hover {
     background-color: #f2f2f2;
 }
-
