@@ -17,9 +17,7 @@
     <input type="hidden" id="mensagem_status" value="{{ 'visivel' if mensagem else 'invisivel' }}">
 
     <form id="formulario_monitoria" action="/registrar" method="post">
-       
         
-       
         <label for="data">Data:</label><br>
         <input type="date" id="data" name="data" required value="{{ today }}" {% if mensagem %}value="{{ request.form.data }}"{% endif %}><br>
 
@@ -67,6 +65,7 @@
         
         <!-- Botão para limpar o formulário -->
         <button type="button" id="registrar_nova_monitoria">Limpar formulário</button><br>
+    
     </form>
 
     <script>
@@ -99,7 +98,7 @@ $(document).ready(function() {
             // Exibir os dados das monitorias na página
             // Por exemplo, você pode usar jQuery para percorrer os dados e adicioná-los a uma tabela HTML
             var table = '<table>';
-            table += '<h2>Tabela de monitorias</h2><br><tr><th>Data</th><th>Projeto</th><th>Nome do Analista</th><th>ID de Atendimento</th><th>Duração</th><th>Chamado</th><th>Nome do Cliente</th><th>Categoria</th><th>Nota</th><th>Observação</th></tr>';
+            table += '<h2>Tabela de monitorias</h2><tr><th>Data</th><th>Projeto</th><th>Nome do Analista</th><th>ID de Atendimento</th><th>Duração</th><th>Chamado</th><th>Nome do Cliente</th><th>Categoria</th><th>Nota</th><th>Observação</th></tr>';
             for (var i = 0; i < monitorias.length; i++) {
                 table += '<tr>';
                 table += '<td>' + monitorias[i].data + '</td>';
