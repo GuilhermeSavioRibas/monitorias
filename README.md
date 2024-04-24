@@ -18,9 +18,8 @@ Este é um projeto de um sistema de controle de monitorias desenvolvido para reg
 
 ### 1. Clone o repositório:
 
-* mkdir monitorias  
+* git clone https://github.com/GuilhermeSavioRibas/monitorias  
 * cd monitorias  
-* git clone https://github.com/GuilhermeSavioRibas/monitorias
 
 ### 2. Instale as dependências:
 
