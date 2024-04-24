@@ -2,7 +2,7 @@
 
 Este é um projeto de um sistema de controle de monitorias desenvolvido para registrar as monitorias realizadas em ligações/chamados de atendimentos dos funcionários de um service desk. O sistema foi construído utilizando Python (Flask) para o backend e HTML, CSS e JavaScript para o frontend.
 
-## Funcionalidades Principais
+## Principais Funcionalidades 
 
 - **Registro de Monitorias:** Os funcionários podem registrar as monitorias realizadas durante as chamadas/atendimentos. (em construção) 
 - **Avaliação de Desempenho:** O sistema permite avaliar o desempenho dos funcionários durante as monitorias. (em construção)
@@ -18,14 +18,14 @@ Este é um projeto de um sistema de controle de monitorias desenvolvido para reg
 
 ### 1. Clone o repositório:
 
-* mkdir monitorias  
+* git clone https://github.com/GuilhermeSavioRibas/monitorias  
 * cd monitorias  
-* git clone https://github.com/GuilhermeSavioRibas/monitorias
 
 ### 2. Instale as dependências:
 
 * pip install -r requirements.txt  
 * pip install --upgrade Flask
+* pip install --upgrade pandas
 
 ### 3. Execute o aplicativo:
 
