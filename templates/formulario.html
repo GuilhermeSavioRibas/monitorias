@@ -10,18 +10,19 @@
     <h1>Controle de Monitorias</h1>
     <div class="container">
         <div class="content">
-            
-
             <!-- Exibir mensagem de confirmação -->
             <p id="mensagem_registro" class="{% if not mensagem %}mensagem_oculta{% endif %}">{{ mensagem }}</p>
 
             <!-- Campo oculto para armazenar o estado da mensagem -->
             <input type="hidden" id="mensagem_status" value="{{ 'visivel' if mensagem else 'invisivel' }}">
-    
+        <div class="table-scroll">
+            <div class="table-container" id="monitorias-table"></div>    
+        </div>
+         
         <div class="form-container">
-            <h2>Registrar monitoria</h2>
+            
             <form id="formulario_monitoria" action="/registrar" method="post">
-        
+                <h2>Registrar monitoria</h2>
                 <label for="data">Data:</label><br>
                 <input type="date" id="data" name="data" required value="{{ today }}" {% if mensagem %}value="{{ request.form.data }}"{% endif %}><br>
 
@@ -71,12 +72,10 @@
                 <button type="button" id="registrar_nova_monitoria">Limpar</button><br>
     
             </form>
+            
+            </div>
         </div>
     </div>
-    <div class="content">
-    <div class="table-container" id="monitorias-table"></div>
-    </div>
-</div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
@@ -88,7 +87,7 @@
                     var monitorias = JSON.parse(data);
                     // Exibir os dados das monitorias na página
                     var table = '<table>';
-                    table += '<h2>Tabela de monitorias</h2><tr><th>Data</th><th>Projeto</th><th>Nome do Analista</th><th>ID de Atendimento</th><th>Duração</th><th>Chamado</th><th>Nome do Cliente</th><th>Categoria</th><th>Nota</th><th>Observação</th></tr>';
+                    table += '<h2>Tabela de monitorias</h2><tr><th>Data</th><th>Projeto</th><th>Nome do Analista</th><th>Call ID</th><th>Duração</th><th>Chamado</th><th>Nome do Cliente</th><th>Categoria</th><th>Nota</th><th>Observação</th></tr>';
                     for (var i = 0; i < monitorias.length; i++) {
                         table += '<tr>';
                         table += '<td>' + monitorias[i].data + '</td>';

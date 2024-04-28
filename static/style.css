@@ -8,41 +8,52 @@ body {
 h1 {
     text-align: center;
     color: #333;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 h2 {
     text-align: center;
     color: #333;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .content {
     display: flex;
     justify-content: center;
     max-width: 1200px; /* Limita a largura total da página */
-    margin: 5px auto; /* Centraliza a div .content */
+    margin: auto; /* Centraliza a div .content */
+    margin-bottom: 100px; 
 }
 
 .container {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
-    width: 100%;
 }
 
 .form-container {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 100%; /* Define a largura do formulário */
-    margin-left: 10%;
+    width: 40%; /* Define a largura do formulário */
 }
 
 .table-container {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 50%; /* Define a largura da tabela */
+    width: 90%; /* Defina a largura da tabela */
+    overflow-x: auto; /* Adiciona uma barra de rolagem horizontal quando necessário */
+    padding: 10px;
+    max-height: 965px;
+}
+
+#monitorias-table {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* Adiciona uma barra de rolagem vertical quando necessário */
+    
 }
 
 form {
@@ -116,14 +127,6 @@ input[type="submit"]:hover,
 
 .mensagem_oculta {
     display: none;
-}
-
-#monitorias-table {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    width: 80%; /* Define a largura da tabela */
 }
 
 #monitorias-table table {
