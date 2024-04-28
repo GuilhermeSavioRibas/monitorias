@@ -45,7 +45,7 @@ h2 {
     width: 90%; /* Defina a largura da tabela */
     overflow-x: auto; /* Adiciona uma barra de rolagem horizontal quando necessário */
     padding: 10px;
-    max-height: 965px;
+    max-height: 830px;
 }
 
 #monitorias-table {
@@ -53,7 +53,7 @@ h2 {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     overflow-y: auto; /* Adiciona uma barra de rolagem vertical quando necessário */
-    
+    max-height:  500px;
 }
 
 form {
@@ -73,16 +73,7 @@ label {
 input[type="text"],
 input[type="number"],
 input[type="date"],
-select {
-    width: calc(100% - 10px);
-    padding: 8px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-    margin-top: -5px;
-}
-
+select,
 textarea {
     width: calc(100% - 10px);
     padding: 8px;
@@ -90,15 +81,11 @@ textarea {
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
-}
-
-select {
-    height: 35px;
+    margin-top: -10px;
 }
 
 input[type="submit"],
 #registrar_nova_monitoria {
-    background-color: #4CAF50;
     color: white;
     margin-top: 5px;
     margin-left: 5px;
@@ -106,14 +93,24 @@ input[type="submit"],
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    width: calc(50% - 10px); /* Ajusta a largura dos botões */
+    width: calc(50% - 10px);
     font-size: 16px;
     text-align: center;
 }
 
-input[type="submit"]:hover,
-#registrar_nova_monitoria:hover {
+input[type="submit"] {
+    background-color: #4CAF50;
+}
+#registrar_nova_monitoria {
+    background-color: #4169E1;
+}
+
+input[type="submit"]:hover {
     background-color: #45a049;
+}
+
+#registrar_nova_monitoria:hover {
+    background-color: #5d80ff;
 }
 
 #mensagem_registro {
@@ -136,9 +133,15 @@ input[type="submit"]:hover,
 
 #monitorias-table th,
 #monitorias-table td {
-    padding: 8px;
+    padding: 4px;
     text-align: left;
     border-bottom: 1px solid #ddd;
+    
+}
+
+#monitorias-table td {
+    max-width: 100px;
+    overflow-y: auto;
 }
 
 #monitorias-table th {
