@@ -3,6 +3,7 @@ import json
 from flask import Flask, render_template, request, redirect, url_for
 from datetime import datetime
 
+
 app = Flask(__name__, static_url_path='/static', static_folder='static')
 
 # Função para carregar os dados da planilha Excel
@@ -21,17 +22,16 @@ def salvar_dados(dados):
 def formulario_monitoria():
     # Carregar os dados das monitorias
     monitorias = carregar_dados().to_dict('records')
-    return render_template('formulario.html', monitorias=monitorias, today=datetime.now().strftime('%Y-%m-%d'))
+    mensagem = request.args.get('mensagem')
+    return render_template('formulario.html', monitorias=monitorias, today=datetime.now().strftime('%Y-%m-%d'), mensagem=mensagem)
 
 # Rota para fornecer dados das monitorias em formato JSON
 @app.route('/monitorias_json')
 def monitorias_json():
     # Carregar dados das monitorias
-    dados_monitorias = carregar_dados()  # Corrigido para chamar a função correta
-
+    dados_monitorias = carregar_dados()
     # Converter dados para um formato JSON compatível
     monitorias_json = dados_monitorias.to_json(orient='records')
-
     return monitorias_json
 
 # Rota para lidar com o envio do formulário
@@ -47,10 +47,8 @@ def registrar_monitoria():
     nome_cliente = request.form['nome_cliente']
     categoria = request.form['categoria']
     nota = request.form['nota']
-    
     # Verificar se o campo de observação está presente no formulário
     observacao = request.form.get('observacao', '')  # Se não estiver presente, usa uma string vazia
-    
     # Carregar dados existentes
     dados = carregar_dados()
 

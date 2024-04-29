@@ -122,8 +122,26 @@ input[type="submit"]:hover {
     border-radius: 5px;
 }
 
+.mensagem_visivel {
+    display: block;
+}
+
 .mensagem_oculta {
     display: none;
+}
+
+.mensagem {
+    text-align: center; 
+    margin-top: 20px;
+}
+
+.mensagem p {
+    background-color: #dff0d8;
+    border: 1px solid #d6e9c6;
+    color: #3c763d;
+    padding: 10px;
+    border-radius: 5px;
+    display: inline-block;
 }
 
 #monitorias-table table {
@@ -136,7 +154,6 @@ input[type="submit"]:hover {
     padding: 4px;
     text-align: left;
     border-bottom: 1px solid #ddd;
-    
 }
 
 #monitorias-table td {

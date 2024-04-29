@@ -5,79 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Monitoria</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.6/css/jquery.dataTables.css">
 </head>
 <body>
     <h1>Controle de Monitorias</h1>
     <div class="container">
         <div class="content">
-            <!-- Exibir mensagem de confirmação -->
-            <p id="mensagem_registro" class="{% if not mensagem %}mensagem_oculta{% endif %}">{{ mensagem }}</p>
+            <div class="table-scroll">
+                <div class="table-container" id="monitorias-table"></div>    
+            </div>
+            <div class="form-container">
+                <form id="formulario_monitoria" action="/registrar" method="post">
+                    
+                    <h2>Registrar monitoria</h2>
+                    
+                    <div class="mensagem">
+                        <!-- Exibir mensagem de confirmação se houver mensagem -->
+                        {% if mensagem %}
+                        <p id="mensagem_registro" class="mensagem_visivel">{{ mensagem }}</p>
+                        {% endif %}
+                        <!-- Campo oculto para armazenar o estado da mensagem -->
+                        <input type="hidden" id="mensagem_status" value="{% if mensagem %}visivel{% else %}invisivel{% endif %}">
+                    </div>
 
-            <!-- Campo oculto para armazenar o estado da mensagem -->
-            <input type="hidden" id="mensagem_status" value="{{ 'visivel' if mensagem else 'invisivel' }}">
-        <div class="table-scroll">
-            <div class="table-container" id="monitorias-table"></div>    
-        </div>
-         
-        <div class="form-container">
-            
-            <form id="formulario_monitoria" action="/registrar" method="post">
-                <h2>Registrar monitoria</h2>
-                <label for="data">Data:</label><br>
-                <input type="date" id="data" name="data" required value="{{ today }}" {% if mensagem %}value="{{ request.form.data }}"{% endif %}><br>
+                    <label for="data">Data:</label><br>
+                    <input type="date" id="data" name="data" required value="{{ today }}" {% if mensagem %}value="{{ request.form.data }}"{% endif %}><br>
 
-                <label for="projeto">Projeto:</label><br>
-                <select id="projeto" name="projeto" required>
-                    <option value="" {% if not mensagem %}selected{% endif %}>Selecione o projeto</option>
-                    <option value="Flowserve" {% if mensagem and request.form.projeto == "Flowserve" %}selected{% endif %}>Flowserve</option>
-                    <option value="Cteep" {% if mensagem and request.form.projeto == "Cteep" %}selected{% endif %}>Cteep</option>
-                    <option value="Henkel" {% if mensagem and request.form.projeto == "Henkel" %}selected{% endif %}>Henkel</option>
-                    <option value="UUS" {% if mensagem and request.form.projeto == "UUS" %}selected{% endif %}>UUS</option>
-                </select><br>
+                    <label for="projeto">Projeto:</label><br>
+                    <select id="projeto" name="projeto" required>
+                        <option value="" {% if not mensagem %}selected{% endif %}>Selecione o projeto</option>
+                        <option value="Flowserve" {% if mensagem and request.form.projeto == "Flowserve" %}selected{% endif %}>Flowserve</option>
+                        <option value="Cteep" {% if mensagem and request.form.projeto == "Cteep" %}selected{% endif %}>Cteep</option>
+                        <option value="Henkel" {% if mensagem and request.form.projeto == "Henkel" %}selected{% endif %}>Henkel</option>
+                        <option value="UUS" {% if mensagem and request.form.projeto == "UUS" %}selected{% endif %}>UUS</option>
+                    </select><br>
 
-                <label for="nome_analista">Nome do Analista:</label><br>
-                <input type="text" id="nome_analista" name="nome_analista" required {% if mensagem %}value="{{ request.form.nome_analista }}"{% endif %}><br>
+                    <label for="nome_analista">Nome do Analista:</label><br>
+                    <input type="text" id="nome_analista" name="nome_analista" required {% if mensagem %}value="{{ request.form.nome_analista }}"{% endif %}><br>
+                    
+                    <label for="id_atendimento">Call_ID / Interaction:</label><br>
+                    <input type="text" id="id_atendimento" name="id_atendimento" required {% if mensagem %}value="{{ request.form.id_atendimento }}"{% endif %}><br>
                 
-                <label for="id_atendimento">Call_ID / Interaction:</label><br>
-                <input type="text" id="id_atendimento" name="id_atendimento" required {% if mensagem %}value="{{ request.form.id_atendimento }}"{% endif %}><br>
-            
-                <label for="duracao">Duração (em minutos):</label><br>
-                <input type="number" id="duracao" name="duracao" required {% if mensagem %}value="{{ request.form.duracao }}"{% endif %}><br>
+                    <label for="duracao">Duração (em minutos):</label><br>
+                    <input type="number" id="duracao" name="duracao" required {% if mensagem %}value="{{ request.form.duracao }}"{% endif %}><br>
 
-                <label for="chamado">Numero do chamado:</label><br>
-                <input type="text" id="chamado" name="chamado" required {% if mensagem %}value="{{ request.form.chamado }}"{% endif %}><br>
-                
-                <label for="nome_cliente">Nome do Cliente:</label><br>
-                <input type="text" id="nome_cliente" name="nome_cliente" required {% if mensagem %}value="{{ request.form.nome_cliente }}"{% endif %}><br>
-                
-                <label for="categoria">Categoria do atendimento:</label><br>
-                <select id="categoria" name="categoria" required>
-                    <option value="Acessos" {% if mensagem and request.form.categoria == 'Acessos' %}selected{% endif %}>Acessos</option>
-                    <option value="Hardware" {% if mensagem and request.form.categoria == 'Hardware' %}selected{% endif %}>Hardware</option>
-                    <option value="Software" {% if mensagem and request.form.categoria == 'Software' %}selected{% endif %}>Software</option>
-                    <option value="Consulta" {% if mensagem and request.form.categoria == 'Consulta' %}selected{% endif %}>Consulta</option>
-                    <option value="Outros" {% if mensagem and request.form.categoria == 'Outros' %}selected{% endif %}>Outros</option>
-                </select><br>
+                    <label for="chamado">Numero do chamado:</label><br>
+                    <input type="text" id="chamado" name="chamado" required {% if mensagem %}value="{{ request.form.chamado }}"{% endif %}><br>
+                    
+                    <label for="nome_cliente">Nome do Cliente:</label><br>
+                    <input type="text" id="nome_cliente" name="nome_cliente" required {% if mensagem %}value="{{ request.form.nome_cliente }}"{% endif %}><br>
+                    
+                    <label for="categoria">Categoria do atendimento:</label><br>
+                    <select id="categoria" name="categoria" required>
+                        <option value="Acessos" {% if mensagem and request.form.categoria == 'Acessos' %}selected{% endif %}>Acessos</option>
+                        <option value="Hardware" {% if mensagem and request.form.categoria == 'Hardware' %}selected{% endif %}>Hardware</option>
+                        <option value="Software" {% if mensagem and request.form.categoria == 'Software' %}selected{% endif %}>Software</option>
+                        <option value="Consulta" {% if mensagem and request.form.categoria == 'Consulta' %}selected{% endif %}>Consulta</option>
+                        <option value="Outros" {% if mensagem and request.form.categoria == 'Outros' %}selected{% endif %}>Outros</option>
+                    </select><br>
 
-                <label for="nota">Nota:</label><br>
-                <input type="number" id="nota" name="nota" required {% if mensagem %}value="{{ request.form.nota }}"{% endif %}><br>
+                    <label for="nota">Nota:</label><br>
+                    <input type="number" id="nota" name="nota" required {% if mensagem %}value="{{ request.form.nota }}"{% endif %}><br>
 
-                <label for="observacao">Observação:</label><br>
-                <textarea id="observacao" name="observacao">{% if mensagem %}{{ request.form.observacao }}{% endif %}</textarea><br><br>
+                    <label for="observacao">Observação:</label><br>
+                    <textarea id="observacao" name="observacao">{% if mensagem %}{{ request.form.observacao }}{% endif %}</textarea><br><br>
 
-                <!-- Botão para salvar a monitoria -->
-                <input type="submit" value="Salvar">
-                
-                <!-- Botão para limpar o formulário -->
-                <button type="button" id="registrar_nova_monitoria">Limpar</button><br>
-    
-            </form>
-            
+                    <!-- Botão para salvar a monitoria -->
+                    <input type="submit" value="Salvar">
+                    
+                    <!-- Botão para limpar o formulário -->
+                    <button type="button" id="registrar_nova_monitoria">Limpar</button><br>
+        
+                </form>                
             </div>
         </div>
     </div>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.js"></script>
     <script>
         $(document).ready(function() {
             $.ajax({
@@ -86,8 +90,8 @@
                 success: function(data) {
                     var monitorias = JSON.parse(data);
                     // Exibir os dados das monitorias na página
-                    var table = '<table>';
-                    table += '<h2>Tabela de monitorias</h2><tr><th>Data</th><th>Projeto</th><th>Nome do Analista</th><th>Call ID</th><th>Duração</th><th>Chamado</th><th>Nome do Cliente</th><th>Categoria</th><th>Nota</th><th>Observação</th></tr>';
+                    var table = '<table id="tabelaMonitorias" class="display">';
+                    table += '<h2>Tabela de monitorias</h2><thead><tr><th>Data</th><th>Projeto</th><th>Nome do Analista</th><th>Call ID</th><th>Duração</th><th>Chamado</th><th>Nome do Cliente</th><th>Categoria</th><th>Nota</th><th>Observação</th></tr></thead><tbody>';
                     for (var i = 0; i < monitorias.length; i++) {
                         table += '<tr>';
                         table += '<td>' + monitorias[i].data + '</td>';
@@ -99,16 +103,24 @@
                         table += '<td>' + monitorias[i].nome_cliente + '</td>';
                         table += '<td>' + monitorias[i].categoria + '</td>';
                         table += '<td>' + monitorias[i].nota + '</td>';
-                        // Verifica se a observação está definida e não é nula
-                        if (monitorias[i].observacao !== null && monitorias[i].observacao !== undefined) {
-                            table += '<td>' + monitorias[i].observacao + '</td>';
-                        } else {
-                            table += '<td></td>'; // Se não estiver definida, exibe uma célula vazia
-                        }
+                        table += '<td>' + (monitorias[i].observacao ? monitorias[i].observacao : '') + '</td>';
                         table += '</tr>';
                     }
-                    table += '</table>';
+                    table += '</tbody></table>';
                     $('#monitorias-table').html(table);
+
+                    // Inicializar DataTables
+                    if ($.fn.DataTable && $.fn.DataTable.isDataTable('#tabelaMonitorias')) {
+                        $('#tabelaMonitorias').DataTable();
+                    } else {
+                        console.log("DataTables não foi carregado corretamente.");
+                    }
+
+                    // Exibir mensagem de confirmação se necessário
+                    var mensagemStatus = $('#mensagem_status').val();
+                    if (mensagemStatus === 'visivel') {
+                        $('#mensagem_registro').addClass('mensagem_visivel');
+                    }
                 }
             });
         });
@@ -130,7 +142,27 @@
     document.getElementById("nota").value = "";
     document.getElementById("observacao").value = "";
     });
-    </script>
     
+    function redirecionarParaPaginaInicial() {
+        // Verificar se a mensagem está presente na URL
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('mensagem')) {
+            // Aguardar 1 segundo e redirecionar para a URL inicial
+            setTimeout(function() {
+                window.location.href = "/";
+            }, 2000); // 2000 milissegundos = 2 segundos
+        }
+    }
+
+    // Chamar a função assim que o documento estiver pronto
+    redirecionarParaPaginaInicial();
+
+    // Verificar se a mensagem está presente na URL após o redirecionamento
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('mensagem')) {
+        // Chamar a função de redirecionamento novamente
+        redirecionarParaPaginaInicial();
+    }
+</script>
 </body>
 </html>
