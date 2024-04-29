@@ -11,8 +11,7 @@
     <h1>Controle de Monitorias</h1>
     <div class="container">
         <div class="content">
-
-            <form id="filtro-form">
+            <form id="filtro-form" class="form-container">
                 <h2>Filtrar Monitorias</h2>
                 <label for="filtro_data">Data:</label>
                 <input type="date" id="filtro_data" name="filtro_data"><br>
@@ -54,74 +53,73 @@
                 <input type="submit" value="Filtrar">
             </form>
 
+            
             <div class="table-scroll">
                 <div class="table-container" id="monitorias-table"></div>    
             </div>
-
-            <div class="form-container">
-                <form id="formulario_monitoria" action="/registrar" method="post">
+    
+            <form id="formulario_monitoria" action="/registrar" method="post" class="form-container">
                     
-                    <h2>Registrar Monitoria</h2>
-                    
-                    <div class="mensagem">
-                        <!-- Exibir mensagem de confirmação se houver mensagem -->
-                        {% if mensagem %}
-                        <p id="mensagem_registro" class="mensagem_visivel">{{ mensagem }}</p>
-                        {% endif %}
-                        <!-- Campo oculto para armazenar o estado da mensagem -->
-                        <input type="hidden" id="mensagem_status" value="{% if mensagem %}visivel{% else %}invisivel{% endif %}">
-                    </div>
-
-                    <label for="data">Data:</label><br>
-                    <input type="date" id="data" name="data" required value="{{ today }}" {% if mensagem %}value="{{ request.form.data }}"{% endif %}><br>
-
-                    <label for="projeto">Projeto:</label><br>
-                    <select id="projeto" name="projeto" required>
-                        <option value="" {% if not mensagem %}selected{% endif %}>Selecione o projeto</option>
-                        <option value="Flowserve" {% if mensagem and request.form.projeto == "Flowserve" %}selected{% endif %}>Flowserve</option>
-                        <option value="Cteep" {% if mensagem and request.form.projeto == "Cteep" %}selected{% endif %}>Cteep</option>
-                        <option value="Henkel" {% if mensagem and request.form.projeto == "Henkel" %}selected{% endif %}>Henkel</option>
-                        <option value="UUS" {% if mensagem and request.form.projeto == "UUS" %}selected{% endif %}>UUS</option>
-                    </select><br>
-
-                    <label for="nome_analista">Nome do Analista:</label><br>
-                    <input type="text" id="nome_analista" name="nome_analista" required {% if mensagem %}value="{{ request.form.nome_analista }}"{% endif %}><br>
-                    
-                    <label for="id_atendimento">Call_ID / Interaction:</label><br>
-                    <input type="text" id="id_atendimento" name="id_atendimento" required {% if mensagem %}value="{{ request.form.id_atendimento }}"{% endif %}><br>
+                <h2>Registrar Monitoria</h2>
                 
-                    <label for="duracao">Duração (em minutos):</label><br>
-                    <input type="number" id="duracao" name="duracao" required {% if mensagem %}value="{{ request.form.duracao }}"{% endif %}><br>
+                <div class="mensagem">
+                    <!-- Exibir mensagem de confirmação se houver mensagem -->
+                    {% if mensagem %}
+                    <p id="mensagem_registro" class="mensagem_visivel">{{ mensagem }}</p>
+                    {% endif %}
+                    <!-- Campo oculto para armazenar o estado da mensagem -->
+                    <input type="hidden" id="mensagem_status" value="{% if mensagem %}visivel{% else %}invisivel{% endif %}">
+                </div>
 
-                    <label for="chamado">Numero do chamado:</label><br>
-                    <input type="text" id="chamado" name="chamado" required {% if mensagem %}value="{{ request.form.chamado }}"{% endif %}><br>
-                    
-                    <label for="nome_cliente">Nome do Cliente:</label><br>
-                    <input type="text" id="nome_cliente" name="nome_cliente" required {% if mensagem %}value="{{ request.form.nome_cliente }}"{% endif %}><br>
-                    
-                    <label for="categoria">Categoria do atendimento:</label><br>
-                    <select id="categoria" name="categoria" required>
-                        <option value="Acessos" {% if mensagem and request.form.categoria == 'Acessos' %}selected{% endif %}>Acessos</option>
-                        <option value="Hardware" {% if mensagem and request.form.categoria == 'Hardware' %}selected{% endif %}>Hardware</option>
-                        <option value="Software" {% if mensagem and request.form.categoria == 'Software' %}selected{% endif %}>Software</option>
-                        <option value="Consulta" {% if mensagem and request.form.categoria == 'Consulta' %}selected{% endif %}>Consulta</option>
-                        <option value="Outros" {% if mensagem and request.form.categoria == 'Outros' %}selected{% endif %}>Outros</option>
-                    </select><br>
+                <label for="data">Data:</label><br>
+                <input type="date" id="data" name="data" required value="{{ today }}" {% if mensagem %}value="{{ request.form.data }}"{% endif %}><br>
 
-                    <label for="nota">Nota:</label><br>
-                    <input type="number" id="nota" name="nota" required {% if mensagem %}value="{{ request.form.nota }}"{% endif %}><br>
+                <label for="projeto">Projeto:</label><br>
+                <select id="projeto" name="projeto" required>
+                    <option value="" {% if not mensagem %}selected{% endif %}>Selecione o projeto</option>
+                    <option value="Flowserve" {% if mensagem and request.form.projeto == "Flowserve" %}selected{% endif %}>Flowserve</option>
+                    <option value="Cteep" {% if mensagem and request.form.projeto == "Cteep" %}selected{% endif %}>Cteep</option>
+                    <option value="Henkel" {% if mensagem and request.form.projeto == "Henkel" %}selected{% endif %}>Henkel</option>
+                    <option value="UUS" {% if mensagem and request.form.projeto == "UUS" %}selected{% endif %}>UUS</option>
+                </select><br>
 
-                    <label for="observacao">Observação:</label><br>
-                    <textarea id="observacao" name="observacao">{% if mensagem %}{{ request.form.observacao }}{% endif %}</textarea><br><br>
+                <label for="nome_analista">Nome do Analista:</label><br>
+                <input type="text" id="nome_analista" name="nome_analista" required {% if mensagem %}value="{{ request.form.nome_analista }}"{% endif %}><br>
+                
+                <label for="id_atendimento">Call_ID / Interaction:</label><br>
+                <input type="text" id="id_atendimento" name="id_atendimento" required {% if mensagem %}value="{{ request.form.id_atendimento }}"{% endif %}><br>
+            
+                <label for="duracao">Duração (em minutos):</label><br>
+                <input type="number" id="duracao" name="duracao" required {% if mensagem %}value="{{ request.form.duracao }}"{% endif %}><br>
 
-                    <!-- Botão para salvar a monitoria -->
-                    <input type="submit" value="Salvar">
-                    
-                    <!-- Botão para limpar o formulário -->
-                    <button type="button" id="registrar_nova_monitoria">Limpar</button><br>
-        
-                </form>                
-            </div>
+                <label for="chamado">Numero do chamado:</label><br>
+                <input type="text" id="chamado" name="chamado" required {% if mensagem %}value="{{ request.form.chamado }}"{% endif %}><br>
+                
+                <label for="nome_cliente">Nome do Cliente:</label><br>
+                <input type="text" id="nome_cliente" name="nome_cliente" required {% if mensagem %}value="{{ request.form.nome_cliente }}"{% endif %}><br>
+                
+                <label for="categoria">Categoria do atendimento:</label><br>
+                <select id="categoria" name="categoria" required>
+                    <option value="Acessos" {% if mensagem and request.form.categoria == 'Acessos' %}selected{% endif %}>Acessos</option>
+                    <option value="Hardware" {% if mensagem and request.form.categoria == 'Hardware' %}selected{% endif %}>Hardware</option>
+                    <option value="Software" {% if mensagem and request.form.categoria == 'Software' %}selected{% endif %}>Software</option>
+                    <option value="Consulta" {% if mensagem and request.form.categoria == 'Consulta' %}selected{% endif %}>Consulta</option>
+                    <option value="Outros" {% if mensagem and request.form.categoria == 'Outros' %}selected{% endif %}>Outros</option>
+                </select><br>
+
+                <label for="nota">Nota:</label><br>
+                <input type="number" id="nota" name="nota" required {% if mensagem %}value="{{ request.form.nota }}"{% endif %}><br>
+
+                <label for="observacao">Observação:</label><br>
+                <textarea id="observacao" name="observacao">{% if mensagem %}{{ request.form.observacao }}{% endif %}</textarea><br><br>
+
+                <!-- Botão para salvar a monitoria -->
+                <input type="submit" value="Salvar">
+                
+                <!-- Botão para limpar o formulário -->
+                <button type="button" id="registrar_nova_monitoria">Limpar</button><br>
+    
+            </form>                
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

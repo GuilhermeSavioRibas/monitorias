@@ -29,23 +29,34 @@ h2 {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .form-container {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Definindo a largura do formulário */
+}
+
+#formulario_monitoria {
+    width: 47%;
+    height: 100%;
+}
+
+.table-scroll {
+    width: 60%;
 }
 
 .table-container {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 90%; /* Defina a largura da tabela */
-    overflow-x: auto; /* Adiciona uma barra de rolagem horizontal quando necessário */
+    overflow-x: auto;
     padding: 10px;
-    max-height: 830px;
-    margin-left: 20px;
+    max-height: 500px;
+    margin-left: 50px;
 }
 
 #monitorias-table {
@@ -53,16 +64,12 @@ h2 {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     overflow-y: auto; /* Adiciona uma barra de rolagem vertical quando necessário */
-    max-height:  500px;
-}
-
-#formulario_monitoria {
-    width: 100%; /* Defina a largura do formulário */
+    width: 82%;
 }
 
 form {
     background: #fff;
-    padding: 20px;
+    padding: 10px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -178,11 +185,10 @@ input[type="submit"]:hover {
 
 #filtro-form {
     background: #fff;
-    padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 30%; /* Definindo a largura do formulário */
-    
+    height: 100%;
 }
 
 #filtro-form label {
@@ -203,6 +209,7 @@ input[type="submit"]:hover {
     border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
+    justify-content: center;
 }
 
 #filtro-form input[type="submit"] {
