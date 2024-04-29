@@ -11,13 +11,57 @@
     <h1>Controle de Monitorias</h1>
     <div class="container">
         <div class="content">
+
+            <form id="filtro-form">
+                <h2>Filtrar Monitorias</h2>
+                <label for="filtro_data">Data:</label>
+                <input type="date" id="filtro_data" name="filtro_data"><br>
+
+                <label for="filtro_projeto">Projeto:</label>
+                <select id="filtro_projeto" name="filtro_projeto">
+                    <option value="">Todos os projetos</option>
+                    <option value="Flowserve">Flowserve</option>
+                    <option value="Cteep">Cteep</option>
+                    <option value="Henkel">Henkel</option>
+                    <option value="UUS">UUS</option>
+                </select><br>
+
+                <label for="filtro_nome_analista">Nome do Analista:</label>
+                <input type="text" id="filtro_nome_analista" name="filtro_nome_analista"><br>
+                
+                <label for="filtro_id_atendimento">Call ID:</label>
+                <input type="text" id="filtro_id_atendimento" name="filtro_id_atendimento"><br>
+
+                <label for="filtro_chamado">Chamado:</label>
+                <input type="text" id="filtro_chamado" name="filtro_chamado"><br>
+                
+                <label for="filtro_nome_cliente">Nome do Cliente:</label>
+                <input type="text" id="filtro_nome_cliente" name="filtro_nome_cliente"><br>
+
+                <label for="filtro_categoria">Categoria:</label>
+                <select id="filtro_categoria" name="filtro_categoria">
+                    <option value="">Todas as categorias</option>
+                    <option value="Acessos">Acessos</option>
+                    <option value="Hardware">Hardware</option>
+                    <option value="Software">Software</option>
+                    <option value="Consulta">Consulta</option>
+                    <option value="Outros">Outros</option>
+                </select><br>
+                
+                <label for="filtro_nota">Nota:</label>
+                <input type="text" id="filtro_nota" name="filtro_nota"><br>
+                
+                <input type="submit" value="Filtrar">
+            </form>
+
             <div class="table-scroll">
                 <div class="table-container" id="monitorias-table"></div>    
             </div>
+
             <div class="form-container">
                 <form id="formulario_monitoria" action="/registrar" method="post">
                     
-                    <h2>Registrar monitoria</h2>
+                    <h2>Registrar Monitoria</h2>
                     
                     <div class="mensagem">
                         <!-- Exibir mensagem de confirmação se houver mensagem -->
@@ -82,6 +126,86 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#filtro-form').submit(function(event) {
+                event.preventDefault(); // Evitar o envio do formulário
+                filtrarTabela(); // Aplicar filtro à tabela
+            });
+
+            function filtrarTabela() {
+                var projetoSelecionado = $('#filtro_projeto').val();
+                var categoriaSelecionada = $('#filtro_categoria').val();
+                var nomeAnalista = $('#filtro_nome_analista').val().toLowerCase();
+                var idAtendimento = $('#filtro_id_atendimento').val().toLowerCase();
+                var chamado = $('#filtro_chamado').val().toLowerCase();
+                var nomeCliente = $('#filtro_nome_cliente').val().toLowerCase();
+                var nota = $('#filtro_nota').val().toLowerCase();
+                var data = $('#filtro_data').val();
+
+                // Mostrar todas as linhas da tabela
+                $('#monitorias-table table tbody tr').show();
+
+                // Esconder linhas que não correspondem aos critérios de filtro
+                if (projetoSelecionado) {
+                    $('#monitorias-table table tbody tr').each(function() {
+                        if ($(this).find('td:nth-child(2)').text() !== projetoSelecionado) {
+                            $(this).hide();
+                        }
+                    });
+                }
+                if (categoriaSelecionada) {
+                    $('#monitorias-table table tbody tr').each(function() {
+                        if ($(this).find('td:nth-child(8)').text() !== categoriaSelecionada) {
+                            $(this).hide();
+                        }
+                    });
+                }
+                if (nomeAnalista) {
+                    $('#monitorias-table table tbody tr').each(function() {
+                        if ($(this).find('td:nth-child(3)').text().toLowerCase().indexOf(nomeAnalista) === -1) {
+                            $(this).hide();
+                        }
+                    });
+                }
+                if (idAtendimento) {
+                    $('#monitorias-table table tbody tr').each(function() {
+                        if ($(this).find('td:nth-child(4)').text().toLowerCase().indexOf(idAtendimento) === -1) {
+                            $(this).hide();
+                        }
+                    });
+                }
+                if (chamado) {
+                    $('#monitorias-table table tbody tr').each(function() {
+                        if ($(this).find('td:nth-child(6)').text().toLowerCase().indexOf(chamado) === -1) {
+                            $(this).hide();
+                        }
+                    });
+                }
+                if (nomeCliente) {
+                    $('#monitorias-table table tbody tr').each(function() {
+                        if ($(this).find('td:nth-child(7)').text().toLowerCase().indexOf(nomeCliente) === -1) {
+                            $(this).hide();
+                        }
+                    });
+                }
+                if (nota) {
+                    $('#monitorias-table table tbody tr').each(function() {
+                        if ($(this).find('td:nth-child(9)').text().toLowerCase().indexOf(nota) === -1) {
+                            $(this).hide();
+                        }
+                    });
+                }
+                if (data) {
+                    $('#monitorias-table table tbody tr').each(function() {
+                        if ($(this).find('td:nth-child(1)').text() !== data) {
+                            $(this).hide();
+                        }
+                    });
+                }
+            }
+        });
+    </script>
     <script>
         $(document).ready(function() {
             $.ajax({
