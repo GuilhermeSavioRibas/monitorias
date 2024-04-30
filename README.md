@@ -26,8 +26,6 @@ Este é um projeto de um sistema de controle de monitorias desenvolvido para reg
 ### 3. Instale as dependências:
 
 * pip install -r requirements.txt  
-* pip install --upgrade Flask
-* pip install --upgrade pandas
 
 ### 4. Execute o aplicativo:
 
