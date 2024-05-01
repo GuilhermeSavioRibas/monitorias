@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Monitoria</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.6/css/jquery.dataTables.css">
 </head>
 <body>
@@ -52,7 +52,6 @@
                 
                 <input type="submit" value="Filtrar">
             </form>
-
             
             <div class="table-scroll">
                 <div class="table-container" id="monitorias-table"></div>    
@@ -118,173 +117,10 @@
                 
                 <!-- Botão para limpar o formulário -->
                 <button type="button" id="registrar_nova_monitoria">Limpar</button><br>
-    
             </form>                
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#filtro-form').submit(function(event) {
-                event.preventDefault(); // Evitar o envio do formulário
-                filtrarTabela(); // Aplicar filtro à tabela
-            });
-
-            function filtrarTabela() {
-                var projetoSelecionado = $('#filtro_projeto').val();
-                var categoriaSelecionada = $('#filtro_categoria').val();
-                var nomeAnalista = $('#filtro_nome_analista').val().toLowerCase();
-                var idAtendimento = $('#filtro_id_atendimento').val().toLowerCase();
-                var chamado = $('#filtro_chamado').val().toLowerCase();
-                var nomeCliente = $('#filtro_nome_cliente').val().toLowerCase();
-                var nota = $('#filtro_nota').val().toLowerCase();
-                var data = $('#filtro_data').val();
-
-                // Mostrar todas as linhas da tabela
-                $('#monitorias-table table tbody tr').show();
-
-                // Esconder linhas que não correspondem aos critérios de filtro
-                if (projetoSelecionado) {
-                    $('#monitorias-table table tbody tr').each(function() {
-                        if ($(this).find('td:nth-child(2)').text() !== projetoSelecionado) {
-                            $(this).hide();
-                        }
-                    });
-                }
-                if (categoriaSelecionada) {
-                    $('#monitorias-table table tbody tr').each(function() {
-                        if ($(this).find('td:nth-child(8)').text() !== categoriaSelecionada) {
-                            $(this).hide();
-                        }
-                    });
-                }
-                if (nomeAnalista) {
-                    $('#monitorias-table table tbody tr').each(function() {
-                        if ($(this).find('td:nth-child(3)').text().toLowerCase().indexOf(nomeAnalista) === -1) {
-                            $(this).hide();
-                        }
-                    });
-                }
-                if (idAtendimento) {
-                    $('#monitorias-table table tbody tr').each(function() {
-                        if ($(this).find('td:nth-child(4)').text().toLowerCase().indexOf(idAtendimento) === -1) {
-                            $(this).hide();
-                        }
-                    });
-                }
-                if (chamado) {
-                    $('#monitorias-table table tbody tr').each(function() {
-                        if ($(this).find('td:nth-child(6)').text().toLowerCase().indexOf(chamado) === -1) {
-                            $(this).hide();
-                        }
-                    });
-                }
-                if (nomeCliente) {
-                    $('#monitorias-table table tbody tr').each(function() {
-                        if ($(this).find('td:nth-child(7)').text().toLowerCase().indexOf(nomeCliente) === -1) {
-                            $(this).hide();
-                        }
-                    });
-                }
-                if (nota) {
-                    $('#monitorias-table table tbody tr').each(function() {
-                        if ($(this).find('td:nth-child(9)').text().toLowerCase().indexOf(nota) === -1) {
-                            $(this).hide();
-                        }
-                    });
-                }
-                if (data) {
-                    $('#monitorias-table table tbody tr').each(function() {
-                        if ($(this).find('td:nth-child(1)').text() !== data) {
-                            $(this).hide();
-                        }
-                    });
-                }
-            }
-        });
-    </script>
-    <script>
-        $(document).ready(function() {
-            $.ajax({
-                url: '/monitorias_json',
-                type: 'GET',
-                success: function(data) {
-                    var monitorias = JSON.parse(data);
-                    // Exibir os dados das monitorias na página
-                    var table = '<table id="tabelaMonitorias" class="display">';
-                    table += '<h2>Tabela de monitorias</h2><thead><tr><th>Data</th><th>Projeto</th><th>Nome do Analista</th><th>Call ID</th><th>Duração</th><th>Chamado</th><th>Nome do Cliente</th><th>Categoria</th><th>Nota</th><th>Observação</th></tr></thead><tbody>';
-                    for (var i = 0; i < monitorias.length; i++) {
-                        table += '<tr>';
-                        table += '<td>' + monitorias[i].data + '</td>';
-                        table += '<td>' + monitorias[i].projeto + '</td>';
-                        table += '<td>' + monitorias[i].nome_analista + '</td>';
-                        table += '<td>' + monitorias[i].id_atendimento + '</td>';
-                        table += '<td>' + monitorias[i].duracao + '</td>';
-                        table += '<td>' + monitorias[i].chamado + '</td>';
-                        table += '<td>' + monitorias[i].nome_cliente + '</td>';
-                        table += '<td>' + monitorias[i].categoria + '</td>';
-                        table += '<td>' + monitorias[i].nota + '</td>';
-                        table += '<td>' + (monitorias[i].observacao ? monitorias[i].observacao : '') + '</td>';
-                        table += '</tr>';
-                    }
-                    table += '</tbody></table>';
-                    $('#monitorias-table').html(table);
-
-                    // Inicializar DataTables
-                    if ($.fn.DataTable && $.fn.DataTable.isDataTable('#tabelaMonitorias')) {
-                        $('#tabelaMonitorias').DataTable();
-                    } else {
-                        console.log("DataTables não foi carregado corretamente.");
-                    }
-
-                    // Exibir mensagem de confirmação se necessário
-                    var mensagemStatus = $('#mensagem_status').val();
-                    if (mensagemStatus === 'visivel') {
-                        $('#mensagem_registro').addClass('mensagem_visivel');
-                    }
-                }
-            });
-        });
-    </script>
-    <script>
-    // Ação ao clicar no botão "Limpar formulário"
-    document.getElementById('registrar_nova_monitoria').addEventListener('click', function() {
-    // Ocultar a mensagem de confirmação
-    document.getElementById("mensagem_registro").classList.add('mensagem_oculta');
-    document.getElementById("mensagem_status").value = 'invisivel';
-    // Limpar os valores dos campos do formulário
-    document.getElementById("projeto").value = "";
-    document.getElementById("nome_analista").value = "";
-    document.getElementById("id_atendimento").value = "";
-    document.getElementById("duracao").value = "";
-    document.getElementById("chamado").value = "";
-    document.getElementById("nome_cliente").value = "";
-    document.getElementById("categoria").value = "";
-    document.getElementById("nota").value = "";
-    document.getElementById("observacao").value = "";
-    });
-    
-    function redirecionarParaPaginaInicial() {
-        // Verificar se a mensagem está presente na URL
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.has('mensagem')) {
-            // Aguardar 1 segundo e redirecionar para a URL inicial
-            setTimeout(function() {
-                window.location.href = "/";
-            }, 2000); // 2000 milissegundos = 2 segundos
-        }
-    }
-
-    // Chamar a função assim que o documento estiver pronto
-    redirecionarParaPaginaInicial();
-
-    // Verificar se a mensagem está presente na URL após o redirecionamento
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.has('mensagem')) {
-        // Chamar a função de redirecionamento novamente
-        redirecionarParaPaginaInicial();
-    }
-</script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

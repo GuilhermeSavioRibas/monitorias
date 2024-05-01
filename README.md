@@ -16,23 +16,24 @@ Este é um projeto de um sistema de controle de monitorias desenvolvido para reg
 
 ## Instalação e Execução
 
-### 1. Clone o repositório:
+### 1. Python: https://www.python.org/downloads/
+
+### 2. Clone o repositório:
 
 * git clone https://github.com/GuilhermeSavioRibas/monitorias  
 * cd monitorias  
 
-### 2. Instale as dependências:
+### 3. Instale as dependências:
 
 * pip install -r requirements.txt  
 * pip install --upgrade Flask
 * pip install --upgrade pandas
-* pip install openpyxl
 
-### 3. Execute o aplicativo:
+### 4. Execute o aplicativo:
 
 * python monitorias.py
 
-### 4. Acesse o aplicativo em seu navegador:
+### 5. Acesse o aplicativo em seu navegador:
 
 * http://localhost:5000
 

@@ -46,17 +46,16 @@ h2 {
 }
 
 .table-scroll {
-    width: 60%;
+    overflow-x: auto;
 }
 
 .table-container {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    overflow-x: auto;
     padding: 10px;
     max-height: 500px;
-    margin-left: 50px;
+    margin-left: 45px;
 }
 
 #monitorias-table {
